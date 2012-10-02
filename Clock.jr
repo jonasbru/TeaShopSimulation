@@ -1,0 +1,98 @@
+import java.util.*;
+import edu.ucdavis.jr.*;
+
+public class Clock {
+
+  /*
+    @return   The current simulation time.
+  */
+  public op MyTime getTime();
+
+  /*
+    Sets a timer such that the capability ch will be called after
+    the time t has elapsed from the time the timer was set.
+    This means that if the simulation time was 18:32:12 when the
+    timer is set and the timeout is 00:01:20 then the alarm will be
+    set off at simulation time 18:33:32.  This timer can be used to
+    make sure that certain things happen at specific times during the
+    simulation.
+  */
+  public op void setAlarm(cap void() ch, MyTime t);
+
+  /*
+    Stops the clock.
+  */
+  public op void shutdown();
+
+  /*
+    The method returns after the given number of simulation seconds has passed.
+  */
+  public void delay(int seconds) {
+    cap void () alarm = new op void ();
+    setAlarm(alarm, new MyTime(seconds));
+    receive alarm();
+  }
+
+  private op void tick();
+
+  private MyTime currentTime;
+  private int ms;
+  private Map<MyTime, Set<cap void()>> alarms = new HashMap<MyTime, Set<cap void()>>();
+
+  private op void stopTicker();
+
+  /*
+    @param ms   Specifies how many milliseconds one second of simulation time
+                should take in real time. If given the value 10, each second in
+                the simulation will take 10 milliseconds.
+  */
+  public Clock(int ms) {
+    currentTime = new MyTime(0, 0 ,0);
+    this.ms = ms;
+  }
+
+  private process loop {
+    boolean run = true;
+    while (run) {
+      inni void tick() {
+	Set<cap void()> chs = alarms.remove(currentTime);
+	if (chs!=null)
+	  for(Object ch : chs)
+	    send ((cap void())ch)();
+	currentTime.increment();
+      } [] MyTime getTime() {
+	return (MyTime)currentTime.clone();
+      } [] void setAlarm(cap void() ch, MyTime t) {
+	MyTime at = ((MyTime)currentTime.clone()).add(t);
+	Set<cap void()> chs = alarms.remove(at);
+	if (chs == null) {
+	  chs = new HashSet<cap void()>();
+	}
+	chs.add(ch);
+	alarms.put(at, chs);
+      } [] void shutdown() {
+	run = false;
+      }
+    }
+    send stopTicker();
+    if (alarms.size() > 0)
+      System.err.println("Some alarms left: "+alarms);
+  }
+
+  private process ticker {
+    boolean run = true;
+    long next = System.currentTimeMillis();
+    long w;
+    do {
+      inni void stopTicker() {
+	run = false;
+      }
+      else {
+	next += ms;
+	w = Math.max(0,next-System.currentTimeMillis());
+	edu.ucdavis.jr.JR.nap(w);
+	send tick();
+      }
+    } while (run);
+  }
+}
