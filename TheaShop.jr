@@ -1,0 +1,18 @@
+public class TheaShop {
+
+	public static cap void() lastOrder = new op void();
+	public static cap void() closingTime = new op void();
+	private final int openningTime = 15;
+	private final int lastCommandHour = 10;
+
+	public static void main (String[] args){
+		System.out.println("Simulation starting");
+		
+		Clock clock = new Clock(1000);
+		clock.setAlarm(lastOrder,new MyTime(lastCommandHour));
+		clock.setAlarm(closingTime,new MyTime(openningTime));
+
+		System.out.println("Simulation ending");
+   }
+
+}
