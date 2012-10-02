@@ -10,7 +10,7 @@ public class TeaShop {
 	public static op void goodbye(Client client);
 	public static op void aTeaPlease(Client client);
 	
-	private static Clock clock = new Clock(simulationSpeed);
+	public static Clock clock = new Clock(simulationSpeed);
 
 	public static void main (String[] args){
 		System.out.println("Simulation starting");

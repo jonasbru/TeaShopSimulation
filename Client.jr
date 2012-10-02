@@ -1,8 +1,39 @@
+import java.util.*;
+
 public class Client {
 
-	public static op void hereIsYourTeaSir();
+	protected int id;
+	protected int nbTea;
+	protected final int minDrinkingTime = 5;
+	protected final int maxDrinkingTime = 10;
 	
-	public void Client(){
-	}  
+	public void Client(int id, int nbTea){
+		this.id = id;
+		this.nbTea = nbTea;
+		Thread.currentThread().setName("client " + id);
+		
+	}
+
+	public void enter(){
+		TeaShop.print("hello !!!");
+		send TeaShop.hello(this);
+		
+		int teadrunk=0;
+		boolean haveToleave = false;
+ 
+		while (teadrunk < nbTea && !haveToleave){
+			//Asking for a tea
+			//haveToleave = ! TeaShop.aTeaPlease(this);
+		
+			if(!haveToleave){
+				//Drink the tea
+				TeaShop.clock.delay(minDrinkingTime + (int)(Math.random() * ((maxDrinkingTime - minDrinkingTime) + 1)));
+				//receive drinked();
+				teadrunk++;
+			}
+		}	
+	} 
+
+
 }
 
