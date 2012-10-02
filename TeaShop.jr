@@ -1,9 +1,14 @@
 public class TeaShop {
 
-	public static cap void() lastOrder = new op void();
-	public static cap void() closingTime = new op void();
-	private final int openningTime = 15;
-	private final int lastCommandHour = 10;
+	private final static int openningTime = 15;
+	private final static int lastCommandHour = 10;
+	
+	public static op void lastOrder();
+	public static op void closingTime();
+	public static op void hello(Client client);
+	public static op void goodbye(Client client);
+	public static op void aTeaPlease(Client client);
+	
 
 	public static void main (String[] args){
 		System.out.println("Simulation starting");
