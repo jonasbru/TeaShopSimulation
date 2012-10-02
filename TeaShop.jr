@@ -1,4 +1,4 @@
-public class TheaShop {
+public class TeaShop {
 
 	public static cap void() lastOrder = new op void();
 	public static cap void() closingTime = new op void();
