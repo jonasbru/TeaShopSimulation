@@ -2,6 +2,7 @@ public class TeaShop {
 
 	private final static int openningTime = 15;
 	private final static int lastCommandHour = 10;
+	private final static int simulationSpeed = 1000;
 	
 	public static op void lastOrder();
 	public static op void closingTime();
@@ -9,15 +10,21 @@ public class TeaShop {
 	public static op void goodbye(Client client);
 	public static op boolean aTeaPlease(Client client);
 	
+	private static Clock clock = new Clock(simulationSpeed);
 
 	public static void main (String[] args){
 		System.out.println("Simulation starting");
 		
-		Clock clock = new Clock(1000);
 		clock.setAlarm(lastOrder,new MyTime(lastCommandHour));
 		clock.setAlarm(closingTime,new MyTime(openningTime));
 
 		System.out.println("Simulation ending");
    }
+
+	public static void print(String msg) {
+		System.out.println(clock.getTime()  + ": " +
+							Thread.currentThread().getName() +
+							": " + msg);
+	}
 
 }
