@@ -8,7 +8,7 @@ public class TeaShop {
 	public static op void closingTime();
 	public static op void hello(Client client);
 	public static op void goodbye(Client client);
-	public static op void aTeaPlease(Client client);
+	public static op boolean aTeaPlease(Client client);
 	
 	public static Clock clock = new Clock(simulationSpeed);
 

@@ -1,0 +1,30 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class Owner {
+
+	private List<Client> clientList = new ArrayList<Client>();
+
+	private process processOrders {
+		boolean run = true;
+		boolean timeToClose = false;
+
+		while (run) {
+			inni void TeaShop.closingTime() {
+				timeToClose = true;
+			} [] void TeaShop.hello(Client client) {
+				clientList.add(client);
+			} [] void TeaShop.goodbye(Client client) {
+				clientList.remove(client);
+			} [] boolean TeaShop.aTeaPlease(Client client) {
+				return true; //TODO:Change this
+				//TODO: Sleep time
+			} else {
+				if(timeToClose) {
+					run = false;
+				}
+			}
+		}
+	}
+}
+
