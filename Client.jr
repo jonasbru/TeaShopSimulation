@@ -12,11 +12,11 @@ public class Client {
 	public Client(int id, int nbTea){
 		this.id = id;
 		this.nbTea = nbTea;
-		Thread.currentThread().setName("client " + id);
 		
 	}
 
 	private process client{
+		Thread.currentThread().setName("client " + id);
 		TeaShop.print("hello !!!");
 		send TeaShop.hello(this);
 		
