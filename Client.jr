@@ -6,8 +6,8 @@ public class Client {
 	protected int nbTea;
 	protected boolean drinking = false;
 	protected final int meanDrinkingTime = 5;
-	protected final int meanDrinkingTimeNoise = 4;
-	public static op void stopDrink();
+	protected final int meanDrinkingTimeNoise = 0;
+	public op void stopDrink();
 
 	public Client(int id, int nbTea){
 		this.id = id;
@@ -26,11 +26,11 @@ public class Client {
 		while (teadrunk < nbTea && !haveToleave){
 			//Asking for a tea
 			TeaShop.print("I want a tea!!");
-			haveToleave = ! TeaShop.aTeaPlease(this);
-		
+			haveToleave = ! TeaShop.aTeaPlease(this);			
+
 			if(!haveToleave){
-				
-				TeaShop.clock.setAlarm(stopDrink,new MyTime(generateNoisedNumber(meanDrinkingTime,meanDrinkingTimeNoise)));
+				TeaShop.print("tea served!!");
+				TeaShop.clock.setAlarm(stopDrink,new MyTime(1/*generateNoisedNumber(meanDrinkingTime,meanDrinkingTimeNoise)*/));
 				drinking = true;
 
 				while(drinking){
