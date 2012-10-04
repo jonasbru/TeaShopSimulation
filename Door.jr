@@ -23,8 +23,8 @@ public class Door {
 				stillOpen = false;
 			} [] else {
 				//generate client					
-				TeaShop.clock.delay( generateNoisedNumber(mTBC, mTBC_noise) );
-				int nbTea = generateNoisedNumber(meanNbTea,3);					
+				TeaShop.clock.delay( mTBC );
+				int nbTea = meanNbTea;					
 				Client a = new Client(curID,nbTea);
 				receive TeaShop.doorPassed();
 				curID++;
@@ -34,18 +34,4 @@ public class Door {
 		System.out.println("BLAAAAAMMMMMM!!!!!");
 	}
 
-	public int generateNoisedNumber(int number, int gap){
-		int newNumber = (int)(Math.random()*(gap+1))*generateRandomSign() + number;
-		if(newNumber<0)
-			return 0;
-		else
-		return newNumber;
-	}
-
-	private int generateRandomSign(){
-		if(Math.random()>0.5)
-			return 1;
-		else
-			return -1;
-	}
 }

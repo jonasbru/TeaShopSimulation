@@ -5,7 +5,8 @@ public class Client {
 	public int id;
 	protected int nbTea;
 	protected boolean drinking = false;
-	protected final int meanDrinkingTime = 1000;
+	protected boolean lastTea = false;
+	protected final int meanDrinkingTime = 500;
 	protected final int meanDrinkingTimeNoise = 200;
 	public op void stopDrink();
 
@@ -30,7 +31,7 @@ public class Client {
 			haveToleave = ! TeaShop.aTeaPlease(this);			
 
 			if(!haveToleave){
-				TeaShop.clock.setAlarm(stopDrink,new MyTime(generateNoisedNumber(meanDrinkingTime,meanDrinkingTimeNoise)));
+				TeaShop.clock.setAlarm(stopDrink,new MyTime(meanDrinkingTime));
 				drinking = true;
 
 				while(drinking){
@@ -39,15 +40,23 @@ public class Client {
 					} [] void TeaShop.lastOrder() {
 						//Some client want to order a last drink
 						drinking = randomBoolean();
-						if(drinking = false)
+						if(drinking == false){
 							TeaShop.print("Wait I want a last tea!!");
+							lastTea = true;
+						}else{
+							haveToleave = true;//no more drink
+						}
 					}
 				}
 
+				//If the client has order a tea after the lastOrder
+				if(lastTea){
+					TeaShop.clock.delay(meanDrinkingTime);
+					haveToleave = true;
+				}
+				
 				//Drink the tea
 				TeaShop.print("Tea finished!!");
-				
-				//receive drinked();
 				teadrunk++;
 			}
 		}	
@@ -60,25 +69,10 @@ public class Client {
 	} 
 
 	private boolean randomBoolean(){
-		if(Math.random()> 0.5 ){
+		if(Math.random()> 0.5f ){
 			return true;
 		}
 		return false;
-	}
-
-	public int generateNoisedNumber(int number, int gap){
-		int newNumber = (int)(Math.random()*(gap+1))*generateRandomSign() + number;
-		if(newNumber<0)
-			return 0;
-		else
-		return newNumber;
-	}
-
-	private int generateRandomSign(){
-		if(Math.random()>0.5)
-			return 1;
-		else
-			return -1;
 	}
 
 }

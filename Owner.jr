@@ -63,9 +63,10 @@ public class Owner {
 			} [] void TeaShop.doorClosed() st clientList.size() == 0 {
 				TeaShop.print("No more customers, the owner closes the shop !!");
 				run = false;
+				send TeaShop.clock.shutdown();
 				
 			} [] else {
-				if(timeToClose && clientList.size() == 0 && !sendDoorClosed) {
+				if(timeToClose && !sendDoorClosed) {
 					send TeaShop.close();
 					sendDoorClosed = true;
 				}
