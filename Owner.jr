@@ -6,21 +6,58 @@ public class Owner {
 	private List<Client> clientList = new ArrayList<Client>();
 
 	private process processOrders {
+		Thread.currentThread().setName("Owner");
+		
 		boolean run = true;
 		boolean timeToClose = false;
+		
+		int remainingCustomers = 0;
 
 		while (run) {
 			inni void TeaShop.closingTime() {
 				timeToClose = true;
+				remainingCustomers = TeaShop.aTeaPlease.length();
+				TeaShop.print("It's closing time ! " + remainingCustomers + " remaining customers waiting for a tea");
+				
+			} [] void TeaShop.lastOrderForOwner() st TeaShop.aTeaPlease.length() == 0 && TeaShop.closingTime.length() == 0 {
+				for(Client c : clientList) {
+					send TeaShop.lastOrder();
+				}
+				
 			} [] void TeaShop.hello(Client client) {
+				if(!timeToClose) {
+					TeaShop.print("Hello " + client.id);
+				} else {
+					TeaShop.print("Hello " + client.id + ". You won't get any tea, we're closed.");
+				}
 				clientList.add(client);
+				
 			} [] void TeaShop.goodbye(Client client) {
+				TeaShop.print("Goodbye " + client.id);
 				clientList.remove(client);
-			} [] boolean TeaShop.aTeaPlease(Client client) {
-				return true; //TODO:Change this
-				//TODO: Sleep time
+				
+			} [] boolean TeaShop.aTeaPlease(Client client) st TeaShop.closingTime.length() == 0 {
+				TeaShop.print("Preparing a tea for " + client.id);
+				
+				TeaShop.clock.delay(2);
+				
+				if(!timeToClose) {
+					TeaShop.print("Serving a tea to " + client.id);
+					return true;
+					
+				} else if(timeToClose && remainingCustomers > 0) {
+					TeaShop.print("Serving one of the last teas to " + client.id);
+					remainingCustomers--;
+					return true;
+					
+				} else {
+					TeaShop.print("Sorry " + client.id + ", you ordered your tea after the closing hours");
+					return false;
+				}				
+				
 			} else {
-				if(timeToClose) {
+				if(timeToClose && clientList.size() == 0) {
+					TeaShop.print("No more customers, the owner closes the shop !!");
 					run = false;
 				}
 			}

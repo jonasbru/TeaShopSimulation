@@ -1,14 +1,19 @@
 public class Chef {
 
 	private process processOrders {
+		Thread.currentThread().setName("Chef");
+		
 		boolean run = true;
 
 		while (run) {
 			inni void TeaShop.closingTime() {
+				TeaShop.print("Closing time, the Chef leaves the shop !!");
 				run = false;
-			} [] boolean TeaShop.aTeaPlease(Client client) {
-			return true; //TODO: change this
-				//TODO: Sleep time
+			} [] boolean TeaShop.aTeaPlease(Client client) st TeaShop.closingTime.length() == 0 {
+				TeaShop.print("Preparing a tea for " + client.id);
+				TeaShop.clock.delay(2);
+				TeaShop.print("Serving a tea to " + client.id);
+				return true;	
 			}
 		}
 	}

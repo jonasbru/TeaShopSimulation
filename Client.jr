@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Client {
 
-	protected int id;
+	public int id;
 	protected int nbTea;
 	protected boolean drinking = false;
 	protected final int minDrinkingTime = 5;
