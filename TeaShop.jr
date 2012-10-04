@@ -34,4 +34,19 @@ public class TeaShop {
 							": " + msg);
 	}
 
+	public int generateNoisedNumber(int number, int gap){
+		int newNumber = (int)(Math.random()*(gap+1))*generateRandomSign() + number;
+		if(newNumber<0)
+			return 0;
+		else
+		return newNumber;
+	}
+
+	private int generateRandomSign(){
+		if(Math.random()>0.5)
+			return 1;
+		else
+			return -1;
+	}
+
 }

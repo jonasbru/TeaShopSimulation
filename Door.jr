@@ -8,12 +8,12 @@ public class Door {
 	private int curID = 0;
 	private int time;
 	private final int mTBC;
-	private final int mTBC_noise = 3;
+	private final int mTBC_noise;
 	
-	public Door(int time, int meanTimeBetweenClients){
+	public Door(int time, int meanTimeBetweenClients, int meanTimeBetweenClientsNoise){
 		this.time = time;
 		this.mTBC=meanTimeBetweenClients;
-		TeaShop.clock.setAlarm(close,new MyTime(time));
+		this.mTBC_noise=meanTimeBetweenClientsNoise;
 	}
 
   private process open{
@@ -23,7 +23,7 @@ public class Door {
 				stillOpen = false;
 			} [] else {
 				//generate client					
-				TeaShop.clock.delay( generateNoisedNumber(mTBC, mTBC_noise) );
+				TeaShop.clock.delay( TeaShop.generateNoisedNumber(mTBC, mTBC_noise) );
 				int nbTea = generateNoisedNumber(meanNbTea,3);						
 				Client a = new Client(curID,nbTea);
 				curID++;
@@ -32,6 +32,17 @@ public class Door {
 	}
 
 	public int generateNoisedNumber(int number, int gap){
-		return (int)(Math.random()*(gap+1))-(gap)/2 + number;
+		int newNumber = (int)(Math.random()*(gap+1))*generateRandomSign() + number;
+		if(newNumber<0)
+			return 0;
+		else
+		return newNumber;
+	}
+
+	private int generateRandomSign(){
+		if(Math.random()>0.5)
+			return 1;
+		else
+			return -1;
 	}
 }
