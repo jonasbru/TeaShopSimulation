@@ -29,15 +29,15 @@ public class Owner {
 				
 			} [] void TeaShop.hello(Client client) {
 				if(!timeToClose) {
-					TeaShop.print("Hello " + client.id);
+					TeaShop.print("Hello " + client.id + ". (" + clientList.size() + " customers in the shop)");
 				} else {
-					TeaShop.print("Hello " + client.id + ". You won't get any tea, we're closed.");
+					TeaShop.print("Hello " + client.id + ". You won't get any tea, we're closed. (" + clientList.size() + " customers in the shop)");
 				}
 				clientList.add(client);
 				
 			} [] void TeaShop.goodbye(Client client) {
-				TeaShop.print("Goodbye " + client.id);
 				clientList.remove(client);
+				TeaShop.print("Goodbye " + client.id + ". (" + clientList.size() + " customers left in the shop)");
 				
 			} [] boolean TeaShop.aTeaPlease(Client client) st TeaShop.closingTimeOwner.length() == 0 {
 				//TeaShop.print("Preparing a tea for " + client.id);
@@ -58,7 +58,7 @@ public class Owner {
 					return false;
 				}				
 				
-			} else {
+			} [] else {
 				if(timeToClose && clientList.size() == 0) {
 					TeaShop.print("No more customers, the owner closes the shop !!");
 					run = false;
