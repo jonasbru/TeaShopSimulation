@@ -5,6 +5,7 @@ public class TeaShop {
 	private final static int simulationSpeed = 1000;
 	
 	public static op void lastOrder();
+	public static op void lastOrderForOwner();
 	public static op void closingTime();
 	public static op void hello(Client client);
 	public static op void goodbye(Client client);
@@ -15,7 +16,7 @@ public class TeaShop {
 	public static void main (String[] args){
 		System.out.println("Simulation starting");
 		
-		clock.setAlarm(lastOrder,new MyTime(lastCommandHour));
+		clock.setAlarm(lastOrderForOwner,new MyTime(lastCommandHour));
 		clock.setAlarm(closingTime,new MyTime(openningTime));
 
 		System.out.println("Simulation ending");

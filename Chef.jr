@@ -6,9 +6,9 @@ public class Chef {
 		while (run) {
 			inni void TeaShop.closingTime() {
 				run = false;
-			} [] boolean TeaShop.aTeaPlease(Client client) {
-			return true; //TODO: change this
-				//TODO: Sleep time
+			} [] boolean TeaShop.aTeaPlease(Client client) st TeaShop.closingTime.length() == 0 {
+				TeaShop.clock.delay(2);
+				return true;	
 			}
 		}
 	}

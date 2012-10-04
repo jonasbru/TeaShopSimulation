@@ -8,19 +8,31 @@ public class Owner {
 	private process processOrders {
 		boolean run = true;
 		boolean timeToClose = false;
+		
+		int remainingCustomers = 0;
 
 		while (run) {
 			inni void TeaShop.closingTime() {
 				timeToClose = true;
+				remainingCustomers = TeaShop.aTeaPlease.length();
+			} [] void TeaShop.lastOrderForOwner() st TeaShop.aTeaPlease.length() == 0 && TeaShop.closingTime.length() == 0 {
+				for(Client c : clientList) {
+					send TeaShop.lastOrder();
+				}
 			} [] void TeaShop.hello(Client client) {
 				clientList.add(client);
 			} [] void TeaShop.goodbye(Client client) {
 				clientList.remove(client);
-			} [] boolean TeaShop.aTeaPlease(Client client) {
-				return true; //TODO:Change this
-				//TODO: Sleep time
+			} [] boolean TeaShop.aTeaPlease(Client client) st TeaShop.closingTime.length() == 0 {
+				TeaShop.clock.delay(2);
+				if(!timeToClose || (timeToClose && remainingCustomers > 0)) {
+					remainingCustomers--;
+					return true;
+				} else {
+					return false;
+				}				
 			} else {
-				if(timeToClose) {
+				if(timeToClose && clientList.size() == 0) {
 					run = false;
 				}
 			}
