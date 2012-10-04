@@ -2,7 +2,7 @@ public class TeaShop {
 
 	private final static int openningTime = 3600;
 	private final static int lastCommandHour = 3000;
-	private final static int simulationSpeed = 10;
+	private final static int simulationSpeed = 5;
 	
 	public static op void lastOrder();
 	public static op void lastOrderForOwner();
