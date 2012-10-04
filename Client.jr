@@ -5,8 +5,8 @@ public class Client {
 	public int id;
 	protected int nbTea;
 	protected boolean drinking = false;
-	protected final int minDrinkingTime = 5;
-	protected final int maxDrinkingTime = 10;
+	protected final int meanDrinkingTime = 5;
+	protected final int meanDrinkingTimeNoise = 4;
 	public static op void stopDrink();
 
 	public Client(int id, int nbTea){
@@ -30,7 +30,7 @@ public class Client {
 		
 			if(!haveToleave){
 				
-				TeaShop.clock.setAlarm(stopDrink,new MyTime(minDrinkingTime + (int)(Math.random() * ((maxDrinkingTime - minDrinkingTime) + 1))));
+				TeaShop.clock.setAlarm(stopDrink,new MyTime(generateNoisedNumber(meanDrinkingTime,meanDrinkingTimeNoise)));
 				drinking = true;
 
 				while(drinking){
@@ -65,6 +65,10 @@ public class Client {
 			return true;
 		}
 		return false;
+	}
+
+	public int generateNoisedNumber(int number, int gap){
+		return (int)(Math.random()*(gap+1))-(gap)/2 + number;
 	}
 
 }
