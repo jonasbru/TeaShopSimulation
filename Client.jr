@@ -67,7 +67,6 @@ public class Client {
 
 	public int generateNoisedNumber(int number, int gap){
 		int newNumber = (int)(Math.random()*(gap+1))*generateRandomSign() + number;
-		System.out.println(newNumber);
 		if(newNumber<0)
 			return 0;
 		else

@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Door {
 
-	public static op void close();
+
 	private final int meanNbTea = 3; 
   private boolean stillOpen = true;
 	private int curID = 0;
@@ -10,7 +10,7 @@ public class Door {
 	private final int mTBC;
 	private final int mTBC_noise;
 	
-	public Door(int time, int meanTimeBetweenClients, int meanTimeBetweenClientsNoise){
+	public Door(int meanTimeBetweenClients, int meanTimeBetweenClientsNoise){
 		this.time = time;
 		this.mTBC=meanTimeBetweenClients;
 		this.mTBC_noise=meanTimeBetweenClientsNoise;
@@ -18,17 +18,18 @@ public class Door {
 
   private process open{
 		while(stillOpen){
-			inni void close() {
+			inni void TeaShop.close() {
 				//No more client generated
 				stillOpen = false;
 			} [] else {
 				//generate client					
-				TeaShop.clock.delay( TeaShop.generateNoisedNumber(mTBC, mTBC_noise) );
+				TeaShop.clock.delay( generateNoisedNumber(mTBC, mTBC_noise) );
 				int nbTea = generateNoisedNumber(meanNbTea,3);						
 				Client a = new Client(curID,nbTea);
 				curID++;
 			}
 		}
+		send TeaShop.doorClosed();
 	}
 
 	public int generateNoisedNumber(int number, int gap){
