@@ -35,7 +35,7 @@ public class Client {
 
 				while(drinking){
 					inni void stopDrink() {
-						drinking = true;
+						drinking = false;
 					} [] void TeaShop.lastOrder() {
 						//Some client want to order a last drink
 						drinking = randomBoolean();
