@@ -18,7 +18,8 @@ public class Client {
 	private process client{
 		Thread.currentThread().setName("client " + id);
 		TeaShop.print("hello !!!");
-		send TeaShop.hello(this);
+		call TeaShop.hello(this);
+		send TeaShop.doorPassed();
 		
 		int teadrunk=0;
 		boolean haveToleave = false;

@@ -13,6 +13,7 @@ public class TeaShop {
 	public static op boolean aTeaPlease(Client client);
 	public static op void close();
 	public static op void doorClosed();
+	public static op void doorPassed();
 	
 	public static Clock clock = new Clock(simulationSpeed);
 

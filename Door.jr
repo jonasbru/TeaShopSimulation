@@ -24,8 +24,9 @@ public class Door {
 			} [] else {
 				//generate client					
 				TeaShop.clock.delay( generateNoisedNumber(mTBC, mTBC_noise) );
-				int nbTea = generateNoisedNumber(meanNbTea,3);						
+				int nbTea = generateNoisedNumber(meanNbTea,3);					
 				Client a = new Client(curID,nbTea);
+				receive TeaShop.doorPassed();
 				curID++;
 			}
 		}

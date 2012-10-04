@@ -60,7 +60,7 @@ public class Owner {
 					return false;
 				}				
 				
-			} [] void TeaShop.doorClosed() st TeaShop.closingTimeOwner.length() == 0 {
+			} [] void TeaShop.doorClosed() st clientList.size() == 0 {
 				TeaShop.print("No more customers, the owner closes the shop !!");
 				run = false;
 				
