@@ -4,17 +4,19 @@ public class Client {
 
 	protected int id;
 	protected int nbTea;
+	protected boolean drinking = false;
 	protected final int minDrinkingTime = 5;
 	protected final int maxDrinkingTime = 10;
-	
-	public void Client(int id, int nbTea){
+	public static op void stopDrink();
+
+	public Client(int id, int nbTea){
 		this.id = id;
 		this.nbTea = nbTea;
 		Thread.currentThread().setName("client " + id);
 		
 	}
 
-	public void enter(){
+	private process client{
 		TeaShop.print("hello !!!");
 		send TeaShop.hello(this);
 		
@@ -23,17 +25,47 @@ public class Client {
  
 		while (teadrunk < nbTea && !haveToleave){
 			//Asking for a tea
-			//haveToleave = ! TeaShop.aTeaPlease(this);
+			TeaShop.print("I want a tea!!");
+			haveToleave = ! TeaShop.aTeaPlease(this);
 		
 			if(!haveToleave){
+				
+				TeaShop.clock.setAlarm(stopDrink,new MyTime(minDrinkingTime + (int)(Math.random() * ((maxDrinkingTime - minDrinkingTime) + 1))));
+				drinking = true;
+
+				while(drinking){
+					inni void stopDrink() {
+						drinking = true;
+					} [] void TeaShop.lastOrder() {
+						//Some client want to order a last drink
+						drinking = randomBoolean();
+						if(drinking = false)
+							TeaShop.print("Wait I want a last tea!!");
+					}
+				}
+
 				//Drink the tea
-				TeaShop.clock.delay(minDrinkingTime + (int)(Math.random() * ((maxDrinkingTime - minDrinkingTime) + 1)));
+				receive stopDrink();
+				TeaShop.print("Tea finished!!");
+				
 				//receive drinked();
 				teadrunk++;
 			}
 		}	
+
+		if (haveToleave){
+			TeaShop.print("I haven't drink all the tea I want!!");
+		}
+		TeaShop.print("Bye bye!!");
+		send TeaShop.goodbye(this);
 	} 
 
+	private boolean randomBoolean(){
+		if(Math.random()> 0.5 ){
+			return true;
+		}
+		return false;
+	}
 
 }
 

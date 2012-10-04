@@ -18,6 +18,7 @@ public class TeaShop {
 		clock.setAlarm(lastOrder,new MyTime(lastCommandHour));
 		clock.setAlarm(closingTime,new MyTime(openningTime));
 
+		Door woodDoor = new Door( 120, 4 );
 		System.out.println("Simulation ending");
    }
 
