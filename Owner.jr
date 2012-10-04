@@ -60,13 +60,14 @@ public class Owner {
 					return false;
 				}				
 				
-			} [] void TeaShop.doorClosed() {
+			} [] void TeaShop.doorClosed() st TeaShop.closingTimeOwner.length() == 0 {
 				TeaShop.print("No more customers, the owner closes the shop !!");
 				run = false;
 				
 			} [] else {
 				if(timeToClose && clientList.size() == 0 && !sendDoorClosed) {
 					send TeaShop.close();
+					sendDoorClosed = true;
 				}
 			}
 		}
