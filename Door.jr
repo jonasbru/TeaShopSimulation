@@ -30,6 +30,7 @@ public class Door {
 			}
 		}
 		send TeaShop.doorClosed();
+		System.out.println("BLAAAAAMMMMMM!!!!!");
 	}
 
 	public int generateNoisedNumber(int number, int gap){
