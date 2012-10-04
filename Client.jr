@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Client {
 
-	protected int id;
+	public int id;
 	protected int nbTea;
 	protected final int minDrinkingTime = 5;
 	protected final int maxDrinkingTime = 10;
