@@ -58,10 +58,15 @@ public class Client {
 				//If the client has order a tea for the lastOrder
 				if(lastTea){
 					TeaShop.print("I would like a last cup of tea, please!");
-					// We can delay here because no one will emit more signal to the client (after the last order).
-					TeaShop.clock.delay(drinkingTime); 
+					haveToleave = ! TeaShop.aTeaPlease(this);
+
+					if(!haveToleave){
+						// We can delay here because no one will emit more signal to the client (after the last order).
+						TeaShop.clock.delay(drinkingTime); 
+						TeaShop.print("Tea finished!!");
+						teadrunk++;					
+					}					
 					haveToleave = true;
-					teadrunk++;
 				}
 			}
 		}	

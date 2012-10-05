@@ -9,7 +9,8 @@ public class Owner {
 		Thread.currentThread().setName("Owner");
 		
 		TeaShop.print("Owner ready.");
-		
+		send TeaShop.open();
+
 		boolean run = true;
 		boolean timeToClose = false;
 		
