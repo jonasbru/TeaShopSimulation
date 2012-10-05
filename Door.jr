@@ -1,40 +1,38 @@
 import java.util.*;
 
+// Generates clients
 public class Door {
 
-
-	private final int nbTea = 3; 
+	private final int nbTea = 3; // maximum number of tea that client want to drink 
   private boolean stillOpen = true;
-	private int curID = 0;
-	private final int mTBC;
+	private int curID = 0; // ID for the clients
+	private final int TBC; // Time between clients
 	
 	public Door(int meanTimeBetweenClients, int meanTimeBetweenClientsNoise){
-		this.mTBC=meanTimeBetweenClients;
-		this.mTBC_noise=meanTimeBetweenClientsNoise;
+		this.TBC=meanTimeBetweenClients;
 	}
 
   private process open{
 		Thread.currentThread().setName("Door");
 		
 		while(stillOpen){
-			inni void TeaShop.close() {
+			inni void TeaShop.close() { // The owner doesn't want more client ( no more entrance )
 				//No more client generated
 				stillOpen = false;
 				
 			} [] else {
 				//generate client					
-				TeaShop.clock.delay(mTBC);
-						
+				TeaShop.clock.delay(TBC);						
 				Client a = new Client(curID, nbTea);
 				
+				// We wait that the owner know the client (for a safe ending)
 				receive TeaShop.doorPassed();
-				
 				curID++;
 			}
 		}
 		
-		send TeaShop.doorClosed();
-		System.out.println("Door closed !");
+		send TeaShop.doorClosed(); // Warns the owner that there are no more clients generated
+		TeaShop.print("No more entrance !");
 	}
 
 }
