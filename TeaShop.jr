@@ -8,6 +8,7 @@ public class TeaShop {
 	public static op void lastOrderForOwner();
 	public static op void closingTimeOwner();
 	public static op void closingTimeChef();
+	public static op void open();
 	public static op void hello(Client client);
 	public static op void goodbye(Client client);
 	public static op boolean aTeaPlease(Client client);
@@ -27,6 +28,7 @@ public class TeaShop {
 		new Owner();
 		new Chef();
 
+		receive open();
 		Door woodDoor = new Door( 300, 50);
    }
 
