@@ -3,13 +3,15 @@ import java.util.*;
 public class Client {
 
 	public int id;
+	public op void stopDrink();
 	protected int nbTea;
 	protected boolean drinking = false;
 	protected boolean lastTea = false;
-	protected final int meanDrinkingTime = 500;
-	protected final int meanDrinkingTimeNoise = 200;
-	public op void stopDrink();
-
+	protected final int drinkingTime = 500; // in seconds
+	
+	// param:
+	// id: id of the client
+	// nbTea: maximum number of tea to drink 
 	public Client(int id, int nbTea){
 		this.id = id;
 		this.nbTea = nbTea;
@@ -17,31 +19,32 @@ public class Client {
 	}
 
 	private process client{
-		Thread.currentThread().setName("client " + id);
-		TeaShop.print("hello !!!");
+		Thread.currentThread().setName("Client " + id);
+
+		//We enter in the tea shop		
+		TeaShop.print("Hello !");
 		call TeaShop.hello(this);
-		send TeaShop.doorPassed();
+		send TeaShop.doorPassed(); // Prevent the "Door" that the owner know the client
 		
 		int teadrunk=0;
 		boolean haveToleave = false;
  
 		while (teadrunk < nbTea && !haveToleave){
 			//Asking for a tea
-			TeaShop.print("I want a tea!!");
+			TeaShop.print("I would like a cup of tea, please!");
 			haveToleave = ! TeaShop.aTeaPlease(this);			
 
-			if(!haveToleave){
-				TeaShop.clock.setAlarm(stopDrink,new MyTime(meanDrinkingTime));
+			if(!haveToleave){ // If the owner gives a tea
+				TeaShop.clock.setAlarm(stopDrink,new MyTime(drinkingTime));// Starts the alarm for stop drinking
 				drinking = true;
 
-				while(drinking){
+				while(drinking){ //Drink the tea
 					inni void stopDrink() {
 						drinking = false;
 					} [] void TeaShop.lastOrder() {
-						//Some client want to order a last drink
+						//Some client want to order a last drink so they instantly finish their tea
 						drinking = randomBoolean();
 						if(drinking == false){
-							TeaShop.print("Wait I want a last tea!!");
 							lastTea = true;
 						}else{
 							haveToleave = true;//no more drink
@@ -49,22 +52,20 @@ public class Client {
 					}
 				}
 
-				//If the client has order a tea after the lastOrder
-				if(lastTea){
-					TeaShop.clock.delay(meanDrinkingTime);
-					haveToleave = true;
-				}
-				
-				//Drink the tea
 				TeaShop.print("Tea finished!!");
 				teadrunk++;
+
+				//If the client has order a tea for the lastOrder
+				if(lastTea){
+					TeaShop.print("I would like a last cup of tea, please!");
+					// We can delay here because no one will emit more signal to the client (after the last order).
+					TeaShop.clock.delay(drinkingTime); 
+					haveToleave = true;
+					teadrunk++;
+				}
 			}
 		}	
-
-		if (haveToleave){
-			TeaShop.print("I haven't drink all the tea I want!!");
-		}
-		TeaShop.print("Bye bye!!");
+		TeaShop.print("Goodbye!");
 		send TeaShop.goodbye(this);
 	} 
 
@@ -74,6 +75,5 @@ public class Client {
 		}
 		return false;
 	}
-
 }
 
