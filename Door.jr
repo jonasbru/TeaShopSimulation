@@ -33,7 +33,7 @@ public class Door {
 		}
 		
 		send TeaShop.doorClosed(); // Warns the owner that there are no more clients generated
-		TeaShop.print("No more entrance !");
+		TeaShop.print("No more entrances !");
 	}
 
 }
