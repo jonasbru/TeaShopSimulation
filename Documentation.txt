@@ -1,0 +1,6 @@
+1) Global description
+	...
+
+2)An overview of your solution by explaining what your classes do and how they relate to each other.
+
+3)Is there any possibility of deadlock in your solution ? Why (not) ?
