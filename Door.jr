@@ -3,35 +3,38 @@ import java.util.*;
 public class Door {
 
 
-	private final int meanNbTea = 3; 
+	private final int nbTea = 3; 
   private boolean stillOpen = true;
 	private int curID = 0;
-	private int time;
 	private final int mTBC;
-	private final int mTBC_noise;
 	
 	public Door(int meanTimeBetweenClients, int meanTimeBetweenClientsNoise){
-		this.time = time;
 		this.mTBC=meanTimeBetweenClients;
 		this.mTBC_noise=meanTimeBetweenClientsNoise;
 	}
 
   private process open{
+		Thread.currentThread().setName("Door");
+		
 		while(stillOpen){
 			inni void TeaShop.close() {
 				//No more client generated
 				stillOpen = false;
+				
 			} [] else {
 				//generate client					
-				TeaShop.clock.delay( mTBC );
-				int nbTea = meanNbTea;					
-				Client a = new Client(curID,nbTea);
+				TeaShop.clock.delay(mTBC);
+						
+				Client a = new Client(curID, nbTea);
+				
 				receive TeaShop.doorPassed();
+				
 				curID++;
 			}
 		}
+		
 		send TeaShop.doorClosed();
-		System.out.println("BLAAAAAMMMMMM!!!!!");
+		System.out.println("Door closed !");
 	}
 
 }
