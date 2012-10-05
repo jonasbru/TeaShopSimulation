@@ -7,6 +7,10 @@
 
 1) Overview of the solution
 
+	 -Classes-
+	 TeaShop : Main class, creates the Owner, the Chef and the Door, and sets the alarms.
+	 Door: Creates the clients after a given time. Waits until the client notifies to the door that he entered the tea shop and has said hello to the owner before creating another client or sending the message "doorClosed" to the owner. This behaviour prevents that, at the end, the owner leaves the shop when there was still a customer inside the shop, but who hasn't said hello yet to the owner.
+	 Client : The firts thing that the client does is saying hello to the owner, waiting for his answer, and notify the door that he's inside the shop. Then until he reaches his maximum number of teas, he orders a tea, and takes some time to drink it. If he hears the last order call, the client has 50% chances to 
 	 
 	
 	
