@@ -5,6 +5,11 @@ public class Owner {
 
 	private List<Client> clientList = new ArrayList<Client>();
 
+	// Stats
+	private int nbClientCreated = 0;
+	private int nbRefusedOrder = 0;
+	private int nbAcceptedOrder = 0;
+	
 	private process processOrders {
 		Thread.currentThread().setName("Owner");
 		
@@ -26,17 +31,14 @@ public class Owner {
 				
 			} [] void TeaShop.lastOrderForOwner() st TeaShop.aTeaPlease.length() == 0 && TeaShop.closingTimeOwner.length() == 0 {
 					TeaShop.print("Ding Ding !! Last order time !");
-				for(Client c : clientList) {
-					send TeaShop.lastOrder();
-				}
+					for(Client c : clientList) {
+						send TeaShop.lastOrder();
+					}
 				
 			} [] void TeaShop.hello(Client client) {
 				clientList.add(client);
-				if(!timeToClose) {
-					TeaShop.print("Hello " + client.id + ". (" + clientList.size() + " customers in the shop)");
-				} else {
-					TeaShop.print("Hello " + client.id + ". You won't get any tea, we're closed. (" + clientList.size() + " customers in the shop)");
-				}
+				TeaShop.print("Hello " + client.id + ". (" + clientList.size() + " customers in the shop)");
+				nbClientCreated++;
 				
 			} [] void TeaShop.goodbye(Client client) {
 				clientList.remove(client);
@@ -49,21 +51,28 @@ public class Owner {
 				
 				if(!timeToClose) {
 					TeaShop.print("Serving a tea to " + client.id);
+					nbAcceptedOrder++;
 					return true;
 					
 				} else if(timeToClose && remainingCustomers > 0) {
 					TeaShop.print("Serving one of the last teas to " + client.id);
 					remainingCustomers--;
+					nbAcceptedOrder++;				
 					return true;
 					
 				} else {
 					TeaShop.print("Sorry " + client.id + ", you ordered your tea after the closing hours");
+					nbRefusedOrder++;
 					return false;
 				}				
 				
 			} [] void TeaShop.doorClosed() st clientList.size() == 0 {
+				int nbTeaServedByChef;				
+				receive TeaShop.byeOwner(nbTeaServedByChef);
+				nbAcceptedOrder += nbTeaServedByChef;
 				TeaShop.print("No more customers, the owner closes the shop !!");
 				run = false;
+				printStats();
 				send TeaShop.clock.shutdown();
 				
 			} [] else {
@@ -73,6 +82,16 @@ public class Owner {
 				}
 			}
 		}
+	}
+	
+	protected void printStats(){
+			TeaShop.print("");
+			TeaShop.print("####### STATS OF TODAY #######");
+			TeaShop.print("Number of clients: " + nbClientCreated); 
+			TeaShop.print("Accepted orders: " + nbAcceptedOrder); 
+			TeaShop.print("Refused orders: " + nbRefusedOrder);
+			TeaShop.print("##############################");
+				
 	}
 }
 

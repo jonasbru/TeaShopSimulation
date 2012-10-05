@@ -22,12 +22,13 @@ public class Door {
 				
 			} [] else {
 				//generate client					
-				TeaShop.clock.delay(TBC);						
 				Client a = new Client(curID, nbTea);
 				
 				// We wait that the owner know the client (for a safe ending)
 				receive TeaShop.doorPassed();
 				curID++;
+				
+				TeaShop.clock.delay(TBC);						
 			}
 		}
 		

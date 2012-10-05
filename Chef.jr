@@ -6,15 +6,19 @@ public class Chef {
 		TeaShop.print("Chef ready.");
 		
 		boolean run = true;
+		int teaServed = 0;
 
 		while (run) {
 			inni void TeaShop.closingTimeChef() {
 				TeaShop.print("Closing time, the Chef leaves the shop !!");
+				send TeaShop.byeOwner(teaServed);
 				run = false;
+
 			} [] boolean TeaShop.aTeaPlease(Client client) st TeaShop.closingTimeChef.length() == 0 {
 				//TeaShop.print("Preparing a tea for " + client.id);
 				TeaShop.clock.delay(2);
 				TeaShop.print("Serving a tea to " + client.id);
+				teaServed++;
 				return true;	
 			}
 		}

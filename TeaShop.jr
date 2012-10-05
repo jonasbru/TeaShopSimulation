@@ -15,6 +15,7 @@ public class TeaShop {
 	public static op void close();
 	public static op void doorClosed();
 	public static op void doorPassed();
+	public static op void byeOwner(int nbTeasServed);
 	
 	public static Clock clock = new Clock(simulationSpeed);
 
