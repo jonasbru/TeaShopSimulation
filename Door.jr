@@ -8,7 +8,7 @@ public class Door {
 	private int curID = 0; // ID for the clients
 	private final int TBC; // Time between clients
 	
-	public Door(int meanTimeBetweenClients, int meanTimeBetweenClientsNoise){
+	public Door(int meanTimeBetweenClients){
 		this.TBC=meanTimeBetweenClients;
 	}
 

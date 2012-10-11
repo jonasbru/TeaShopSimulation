@@ -1,7 +1,7 @@
 public class TeaShop {
 
-	private final static int openningTime = 3600;
-	private final static int lastCommandHour = 3000;
+	private final static int openningTime = 14400; // 4h
+	private final static int lastCommandHour = 13800; // 3h50
 	private final static int simulationSpeed = 10;
 	
 	public static op void lastOrder();
@@ -30,7 +30,7 @@ public class TeaShop {
 		new Chef();
 
 		receive open();
-		Door woodDoor = new Door( 300, 50);
+		Door woodDoor = new Door( 200);// 200 sec between clients
    }
 
 	public static void print(String msg) {

@@ -67,7 +67,7 @@ public class Client {
 						teadrunk++;					
 					}					
 					haveToleave = true;
-					receive stopDrink();
+					receive stopDrink();// We receive the unhandled signal before finish.
 				}
 			}
 		}	
