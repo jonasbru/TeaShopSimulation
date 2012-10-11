@@ -21,7 +21,7 @@
 	 
 2) Deadlocks ?
 	
-	Of course not ! Hell yeah.
+	We haven't any deadlock: in our algorithm, there is no deadlock because we checked that each sender does not end until all receiver finished. In addition, the sender (owner) is never waiting on a signal from a client.
 	 
 	 
 	 
